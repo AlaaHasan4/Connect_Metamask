@@ -17,7 +17,11 @@ class ConnectWallet extends StatelessWidget {
             child:
                 GetBuilder<ConnectWalletControllerImp>(builder: (controller) {
               if (controller.isConnected && controller.isInOperatingChain) {
-                controller.goHome();
+                if (controller.connected == true) {
+                  controller.goHome();
+                } else {
+                  return Text("You are not connected");
+                }
               } else if (controller.isConnected &&
                   !controller.isInOperatingChain) {
                 return Column(

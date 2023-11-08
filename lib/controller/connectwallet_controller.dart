@@ -17,12 +17,16 @@ class ConnectWalletControllerImp extends ConnectWalletController {
 
   bool get isConnected => isEnabled && currentAddress.isNotEmpty;
 
+  bool connected = false;
+
   Future<void> connect() async {
     if (isEnabled) {
       final accs = await ethereum!.requestAccount();
       if (accs.isNotEmpty) currentAddress = accs.first;
 
       currentChain = await ethereum!.getChainId();
+
+      connected = true;
 
       update();
     }
